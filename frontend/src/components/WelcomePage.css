@@ -12,20 +12,22 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh; /* Full height of the viewport */
-    background-color: #c9c7c7;
+    background-color: #141414;
   }
   
   h1 {
     margin-bottom: 20px;
     font-size: 2.5em;
-    color: #2c3e50;
-    font-family: cursive;
+    color: #cbcdcf;
+    font-family: oswald;
+    text-decoration: underline;
   }
   
   p {
     margin-bottom: 10px;
     font-size: 1.2em;
-    color: #565a5a;
+    color: #bfcaca;
+    
   }
   
   button {
