@@ -17,6 +17,9 @@ function WelcomePage() {
                 <Link to="/prayer-tracker">
                     <button style={{ margin: "10px" }}>Prayer Tracker</button>
                 </Link>
+                <Link to="/islamic-quiz">
+                    <button style={{ margin: "10px" }}>Islamic Quizzes</button>
+                </Link>
                 {/* Add more buttons as you implement features */}
             </div>
         </div>

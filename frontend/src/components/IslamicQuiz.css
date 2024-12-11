@@ -1,0 +1,39 @@
+.islamic-quiz-container {
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    background-color: #000;
+    min-height: 110vh;
+  }
+  
+  .quiz-levels {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .quiz-level {
+    text-align: center;
+  }
+  
+  .level-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+  }
+  
+  .level-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .level-button:hover {
+    background-color: #0056b3;
+  }
