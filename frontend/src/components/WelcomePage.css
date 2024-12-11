@@ -45,3 +45,7 @@ body {
   button:hover {
     background-color: #2980b9;
   }
+
+  h2 {
+    color: #bfcaca;
+  }
