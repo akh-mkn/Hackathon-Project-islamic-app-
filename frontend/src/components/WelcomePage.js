@@ -14,6 +14,9 @@ function WelcomePage() {
                 <Link to="/daily-dua-reminder">
                     <button style={{ margin: "10px" }}>Daily Dua Reminder</button>
                 </Link>
+                <Link to="/prayer-tracker">
+                    <button style={{ margin: "10px" }}>Prayer Tracker</button>
+                </Link>
                 {/* Add more buttons as you implement features */}
             </div>
         </div>

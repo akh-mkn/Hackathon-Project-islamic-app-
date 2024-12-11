@@ -1,0 +1,36 @@
+.prayer-tracker-container {
+    text-align: center;
+    color: #fff;
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.prayer-item {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.prayer-item.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
