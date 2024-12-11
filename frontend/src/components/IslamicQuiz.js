@@ -12,7 +12,7 @@ function IslamicQuiz() {
       {/* Beginner Level */}
       <div className="quiz-level">
         <img
-          src="https://s4.ezgif.com/tmp/ezgif-4-422c8c34ff.jpg" // Replace with an actual image URL
+          src="https://i.pinimg.com/236x/f5/12/6f/f5126f7a8952aac2645e08f405e0ec6f.jpg" // Replace with an actual image URL
           alt="Beginner Level"
           className="level-image"
         />
@@ -25,7 +25,7 @@ function IslamicQuiz() {
       {/* Intermediate Level */}
       <div className="quiz-level">
         <img
-          src="https://s4.ezgif.com/tmp/ezgif-4-57b0bb8a51.jpg" // Replace with an actual image URL
+          src="https://i.pinimg.com/236x/2d/a2/98/2da298bd495d5859c290ad59843a7770.jpg" // Replace with an actual image URL
           alt="Intermediate Level"
           className="level-image"
         />
@@ -38,7 +38,7 @@ function IslamicQuiz() {
       {/* Advanced Level */}
       <div className="quiz-level">
         <img
-          src="https://s4.ezgif.com/tmp/ezgif-4-b30ce16b68.jpg" // Replace with an actual image URL
+          src="https://i.pinimg.com/236x/2e/ce/73/2ece73a76ce3279ea9e0a5047ffef27e.jpg" // Replace with an actual image URL
           alt="Advanced Level"
           className="level-image"
         />
