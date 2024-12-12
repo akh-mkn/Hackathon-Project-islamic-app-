@@ -8,6 +8,7 @@ import IslamicQuiz from "./components/IslamicQuiz";
 import BeginnerQuiz from "./components/BeginnerQuiz"
 import IntermediateQuiz from "./components/IntermediateQuiz"
 import AdvancedQuiz from "./components/AdvancedQuiz"
+import PrayerTimes from "./components/PrayerTimes"
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/islamic-quiz/beginner" element={<BeginnerQuiz />} />
                 <Route path="/islamic-quiz/intermediate" element={<IntermediateQuiz />} />
                 <Route path="/islamic-quiz/advanced" element={<AdvancedQuiz />} />
+                <Route path="/prayer-times" element={<PrayerTimes />} />
             </Routes>
         </Router>
     );

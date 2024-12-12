@@ -20,6 +20,9 @@ function WelcomePage() {
                 <Link to="/islamic-quiz">
                     <button style={{ margin: "10px" }}>Islamic Quizzes</button>
                 </Link>
+                <Link to="prayer-times">
+                    <button style={{ margin: "10px" }}>Prayer Times</button>
+                </Link>
                 {/* Add more buttons as you implement features */}
             </div>
         </div>

@@ -1,0 +1,44 @@
+.prayer-times-container {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1e1e1e; /* Dark background for better contrast */
+    color: #ffffff; /* White text for better readability */
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .prayer-times-container h2 {
+    font-size: 2rem;
+    color: #eef3f2; /* Highlighted color for  title */
+    margin-bottom: 20px;
+  }
+  
+  .prayer-times-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .prayer-times-container li {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #f0f0f0; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444; /* divider between items */
+    padding: 5px 0;
+  }
+  
+  .prayer-times-container li strong {
+    color: #c2bb58; /* Highlights the prayer name */
+  }
+  
+  .error {
+    color: red;
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
