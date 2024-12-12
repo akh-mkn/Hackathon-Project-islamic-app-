@@ -1,0 +1,22 @@
+button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  button.selected {
+    background-color: #27ae60;
+  }
+  
+  .quiz-container {
+    text-align: center;
+    margin-top: 50px;
+  }
