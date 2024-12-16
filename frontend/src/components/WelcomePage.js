@@ -1,32 +1,64 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './WelcomePage.css';
+import "./WelcomePage.css"; // CSS for card styling
+import Header from "./Header"; // Existing header component
 
 function WelcomePage() {
-    return (
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <h1>welcome to the Islamic Multi-Feature App.</h1>
-            <p>select a feature below:</p>
-            <div>
-                <Link to="/supplication-counter">
-                    <button style={{ margin: "10px" }}>Supplication Counter</button>
-                </Link>
-                <Link to="/daily-dua-reminder">
-                    <button style={{ margin: "10px" }}>Daily Dua Reminder</button>
-                </Link>
-                <Link to="/prayer-tracker">
-                    <button style={{ margin: "10px" }}>Prayer Tracker</button>
-                </Link>
-                <Link to="/islamic-quiz">
-                    <button style={{ margin: "10px" }}>Islamic Quizzes</button>
-                </Link>
-                <Link to="prayer-times">
-                    <button style={{ margin: "10px" }}>Prayer Times</button>
-                </Link>
-                {/* Add more buttons as you implement features */}
-            </div>
+  return (
+    <>
+      {/* Header */}
+      <Header />
+
+      {/* Welcome message */}
+      <div className="welcome-container">
+        <h1>Welcome to the Islamic Multi-Feature App.</h1>
+        <p>Select a feature below:</p>
+
+        {/* Features container */}
+        <div className="features-container">
+          {/* Supplication Counter */}
+          <div className="card">
+            <h3>Supplication Counter</h3>
+            <Link to="/supplication-counter">
+              <button className="feature-button">Explore</button>
+            </Link>
+          </div>
+
+          {/* Daily Dua Reminder */}
+          <div className="card">
+            <h3>Daily Dua Reminder</h3>
+            <Link to="/daily-dua-reminder">
+              <button className="feature-button">Explore</button>
+            </Link>
+          </div>
+
+          {/* Prayer Tracker */}
+          <div className="card">
+            <h3>Prayer Tracker</h3>
+            <Link to="/prayer-tracker">
+              <button className="feature-button">Explore</button>
+            </Link>
+          </div>
+
+          {/* Islamic Quizzes */}
+          <div className="card">
+            <h3>Islamic Quizzes</h3>
+            <Link to="/islamic-quiz">
+              <button className="feature-button">Explore</button>
+            </Link>
+          </div>
+
+          {/* Prayer Times */}
+          <div className="card">
+            <h3>Prayer Times</h3>
+            <Link to="/prayer-times">
+              <button className="feature-button">Explore</button>
+            </Link>
+          </div>
         </div>
-    );
+      </div>
+    </>
+  );
 }
 
 export default WelcomePage;
