@@ -13,11 +13,13 @@ import AboutMe from "./components/AboutMe";
 import AppInfo from "./components/AppInfo";
 import ContactMe from "./components/ContactMe";
 import Footer from "./components/Footer";
+import MusicPlayer from "./components/MusicPlayer";
 
 function App() {
     return (
         <Router>
             <div>
+            <MusicPlayer />
             <Routes>
                 <Route path="/" element={<WelcomePage />} />
                 <Route path="/supplication-counter" element={<SupplicationCounter />} />
