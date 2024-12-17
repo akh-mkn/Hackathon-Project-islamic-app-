@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage";
 import SupplicationCounter from "./components/SupplicationCounter";
 import DailyInvocationReminder from "./components/DailyInvocationReminder";
@@ -14,6 +15,13 @@ import AppInfo from "./components/AppInfo";
 import ContactMe from "./components/ContactMe";
 import Footer from "./components/Footer";
 import MusicPlayer from "./components/MusicPlayer";
+import Register from "./components/Register";
+import Login from "./components/Login";
+
+const isAuthenticated = () => {
+    return localStorage.getItem("token") !== null;
+  }; //checks to see if token exists for user 
+
 
 function App() {
     return (
@@ -21,19 +29,69 @@ function App() {
             <div>
             <MusicPlayer />
             <Routes>
-                <Route path="/" element={<WelcomePage />} />
-                <Route path="/supplication-counter" element={<SupplicationCounter />} />
-                <Route path="/daily-dua-reminder" element={<DailyInvocationReminder />} />
-                <Route path="/prayer-tracker" element={<PrayerTracker />} />
-                <Route path="/islamic-quiz" element={<IslamicQuiz />} />
-                <Route path="/islamic-quiz/beginner" element={<BeginnerQuiz />} />
-                <Route path="/islamic-quiz/intermediate" element={<IntermediateQuiz />} />
-                <Route path="/islamic-quiz/advanced" element={<AdvancedQuiz />} />
-                <Route path="/prayer-times" element={<PrayerTimes />} />
-                <Route path="/about" element={<AboutMe />} />
-                <Route path="/app-info" element={<AppInfo />} />
-                <Route path="/contact-me" element={<ContactMe />} />
-            </Routes>
+  {/* Protected Routes: Only accessible if the user is authenticated */}
+  <Route
+    path="/"
+    element={isAuthenticated() ? <WelcomePage /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/supplication-counter"
+    element={isAuthenticated() ? <SupplicationCounter /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/daily-dua-reminder"
+    element={isAuthenticated() ? <DailyInvocationReminder /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/prayer-tracker"
+    element={isAuthenticated() ? <PrayerTracker /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/prayer-times"
+    element={isAuthenticated() ? <PrayerTimes /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/islamic-quiz"
+    element={isAuthenticated() ? <IslamicQuiz /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/islamic-quiz/beginner"
+    element={isAuthenticated() ? <BeginnerQuiz /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/islamic-quiz/intermediate"
+    element={isAuthenticated() ? <IntermediateQuiz /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/islamic-quiz/advanced"
+    element={isAuthenticated() ? <AdvancedQuiz /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/about"
+    element={isAuthenticated() ? <AboutMe /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/app-info"
+    element={isAuthenticated() ? <AppInfo /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/contact-me"
+    element={isAuthenticated() ? <ContactMe /> : <Navigate to="/login" />}
+  />
+
+  {/* Public Routes: Accessible without authentication */}
+  <Route
+    path="/register"
+    element={!isAuthenticated() ? <Register /> : <Navigate to="/" />}
+  />
+  <Route
+    path="/login"
+    element={!isAuthenticated() ? <Login /> : <Navigate to="/" />}
+  />
+
+  {/* Catch-All Route: Redirect unknown paths */}
+  <Route path="*" element={<Navigate to={isAuthenticated() ? "/" : "/login"} />} />
+</Routes>
             <Footer />
             </div>
         </Router>
