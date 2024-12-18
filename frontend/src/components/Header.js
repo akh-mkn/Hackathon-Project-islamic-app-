@@ -6,10 +6,10 @@ function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear the token from local storage
+    // Clears the token from local storage
     localStorage.removeItem("token");
 
-    // Redirect to the login page
+    // Redirects to the login page
     navigate("/login");
 
     //forces a re-render to allow app to reflect state change, no manual refresh!

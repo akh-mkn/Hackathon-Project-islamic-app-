@@ -42,7 +42,7 @@ function IntermediateQuiz() {
     }
   };
 
-  // Display Current Question
+  // displays current question
   return (
     <div className="quiz-container">
       {!showResults ? (

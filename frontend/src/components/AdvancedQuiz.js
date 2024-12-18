@@ -52,7 +52,7 @@ function AdvancedQuiz() {
     }
   };
 
-  // Display Current Question
+  // display current question
   return (
     <div className="quiz-container">
       {!showResults ? (

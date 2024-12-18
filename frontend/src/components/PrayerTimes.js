@@ -6,7 +6,7 @@ function PrayerTimes() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [error, setError] = useState("");
 
-  // Fetch prayer times
+  // Fetches prayer times
   const fetchPrayerTimes = async (latitude, longitude) => {
     const apiURL = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=2`;
     try {
@@ -52,7 +52,7 @@ function PrayerTimes() {
           {Object.keys(prayerTimes).length > 0 ? (
             <ul>
               {Object.entries(prayerTimes)
-                .filter(([key]) => !["imsak", "midnight", "firstthird", "lastthird"].includes(key.toLowerCase()))
+                .filter(([key]) => !["imsak", "midnight", "firstthird", "lastthird"].includes(key.toLowerCase())) //filtering out fields which are output from the API.
                 .map(([key, value]) => (
                   <li key={key}>
                     <strong>{key}:</strong> {value}

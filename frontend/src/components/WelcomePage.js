@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./WelcomePage.css"; // CSS for card styling
-import Header from "./Header"; // Existing header component
+import "./WelcomePage.css"; // CSS imported here for card styling
+import Header from "./Header"; 
 
 function WelcomePage() {
   return (
@@ -26,7 +26,7 @@ function WelcomePage() {
 
           {/* Daily Dua Reminder */}
           <div className="card">
-            <h3>Daily Dua Reminder</h3>
+            <h3>Daily Invocation Reminder</h3>
             <Link to="/daily-dua-reminder">
               <button className="feature-button">Explore</button>
             </Link>

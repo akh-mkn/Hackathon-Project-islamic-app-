@@ -9,7 +9,8 @@ function AboutMe() {
       <p>You may notice particular features to be quite basic, such as the supplication counter! Or maybe, the daily prayer tracker. In truth, I had limited time, however, the way the project is structured, is that I can always revist in the future to continue honing out different parts of it.</p>
       <br></br>
       <p>p.s: my personal favourite feature of the application is the music player. If you haven't seen it already, be sure to click the little button in the bottom right!</p>    
-    </div>
+      <img src="/tuff.gif" alt="App Info pic" style={{ width: "100%", maxWidth: "600px", margin: "20px 0" }} />
+      </div>
   );
 }
 

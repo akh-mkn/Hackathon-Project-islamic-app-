@@ -29,7 +29,7 @@ header nav a:hover {
 }
 
 header button {
-  background-color: #337ab7; /* Matches other button styles */
+  background-color: #337ab7; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -40,5 +40,5 @@ header button {
 }
 
 header button:hover {
-  background-color: #286090; /* Darker blue on hover */
+  background-color: #286090; 
 }

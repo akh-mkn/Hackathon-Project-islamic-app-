@@ -5,7 +5,7 @@ const DailyInvocationReminder = () => {
     //Collection of Invocations
     const duas = [
     "My Lord, forgive me and have mercy upon me.",
-    "My Lord, grant us good in this world and good in the Hereafter, and save us from the torment of the Fire.",
+    "My Lord, grant us good in this world and good in the Hereafter.",
     "My Lord, guide me, protect me, and strengthen my faith.",
     "My Lord, make my affairs easy and relieve me of my burdens.",
     "My Lord, grant me knowledge and increase my wisdom.",
@@ -19,13 +19,15 @@ const DailyInvocationReminder = () => {
     "My Lord, open the doors of goodness for me and close the doors of harm.",
     "My Lord, strengthen my faith and make me among those who are righteous.",
     "My Lord, protect me from harm and evil, and guide me to do what is pleasing to You.",
+    "My Lord, you are the changer of the hearts, so keep my heart firm on this religion.",
+    "My Lord, you are the most forgiving, and you love to forgive, so forgive me.",
     ]
 
 
  // State to manage the current dua
  const [currentDua, setCurrentDua] = useState("");
 
- // Function to get a random dua
+ // function which fetches a random invocation/dua
  const getRandomDua = () => {
    const randomIndex = Math.floor(Math.random() * duas.length);
    setCurrentDua(duas[randomIndex]);
@@ -38,6 +40,10 @@ const DailyInvocationReminder = () => {
      <button id="3" onClick={getRandomDua} style={{ padding: "10px 20px", fontSize: "1em" }}>
        Get Invocation
      </button>
+     <br></br>
+     <p id= "message-1"> “Verily your Lord is Generous and Shy. If His servant raises his hands to Him (in supplication) He becomes shy to return them empty.” </p>
+     <img src="/invocation2.gif" alt="Animated GIF" style={{ width: "500px", borderRadius: "10px" }} />
+
    </div>
  );
 };
