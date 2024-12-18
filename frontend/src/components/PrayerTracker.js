@@ -71,6 +71,8 @@ function PrayerTracker() {
                     </li>
                 ))}
             </ul>
+            <p id = "explain"> Muslims pray 5 times a day: Fajr is the prayer before sunrise. Duhr is the prayer performed at mid-day. Asr is the prayer performed at late afternoon. Maghrib is performed in the evening, when the sun finally sets. And last, but not least, Isha is done during the night.</p>
+            <img src="/prayer-animation.gif" alt="Prayer Animation" style={{ width: "200px", margin: "10px auto", display: "block" }} />
         </div>
     );
 }
