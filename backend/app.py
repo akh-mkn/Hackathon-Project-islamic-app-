@@ -35,12 +35,20 @@ class Message(db.Model):
         self.name = name
         self.email = email
         self.message = message
+        
+
+# Prayer Tracker Model  --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
+class PrayerLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    date = db.Column(db.String(10), nullable=False)  # Format: YYYY-MM-DD
+    prayers_completed = db.Column(db.String(100), nullable=False)  # Stores checked prayers as a comma-separated string
 
 # Initialize the database
 with app.app_context():
     db.create_all()
 
-# Routes
+# Routes for login/register feature
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -80,6 +88,40 @@ def contact():
     db.session.commit()
 
     return jsonify({"message": "Your message has been sent successfully!"}), 201
+
+
+# Route to save checked prayers, not lost upon reload, assigned to user token --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
+@app.route('/prayer-tracker', methods=['POST'])
+def save_prayer_log():
+    data = request.get_json()
+    user_id = data.get('user_id')  # Extracted from token on frontend
+    date = data.get('date')  # Date selected by user
+    prayers = data.get('prayers_completed')  # List of checked prayers
+
+    # Find existing log or create a new one --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
+    log = PrayerLog.query.filter_by(user_id=user_id, date=date).first()
+    if log:
+        log.prayers_completed = ','.join(prayers)
+    else:
+        new_log = PrayerLog(user_id=user_id, date=date, prayers_completed=','.join(prayers))
+        db.session.add(new_log)
+
+    db.session.commit()
+    return jsonify({"message": "Prayer log saved successfully!"}), 200
+
+
+# Route to fetch saved prayers for a particular date --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
+@app.route('/prayer-tracker', methods=['GET'])
+def get_prayer_log():
+    user_id = request.args.get('user_id')  # Extracted from token on frontend
+    date = request.args.get('date')  # Selected date
+
+    # Fetch prayer log for the specific user and date --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
+    log = PrayerLog.query.filter_by(user_id=user_id, date=date).first()
+    prayers = log.prayers_completed.split(',') if log else []
+    
+    return jsonify({"prayers_completed": prayers}), 200
+
 
 if __name__ == "__main__":
     app.run(debug=True)
