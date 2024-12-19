@@ -19,7 +19,7 @@ function ContactMe() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:5000/contact", {
+      const response = await fetch("https://islamic-app-backend.onrender.com/contact", { //THE FETCH URL HAS BEEN UPDATED TO USE BACKEND DEPLOYED URL VIA RENDER. THIS WILL CAUSE ERROR WHEN RAN ON A LOCAL ENVIRONMENT, SO BE AWARE!
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
