@@ -134,7 +134,7 @@ def get_prayer_log():
 
 @app.route('/download-db', methods=['GET'])
 def download_db():
-    db_path = os.path.join(app.instance_path, 'users.db')  # Adjust path if needed
+    db_path = os.path.join(app.instance_path, 'users.db')  
     return send_from_directory(directory=os.path.dirname(db_path), 
                                path=os.path.basename(db_path), 
                                as_attachment=True)
