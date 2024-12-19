@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token
 from flask_cors import CORS 
+from flask import send_from_directory
 import os
 
 app = Flask(__name__)
@@ -127,6 +128,16 @@ def get_prayer_log():
     prayers = log.prayers_completed.split(',') if log else []
     
     return jsonify({"prayers_completed": prayers}), 200
+
+
+# Route to download database file to see contact form messages 
+
+@app.route('/download-db', methods=['GET'])
+def download_db():
+    db_path = os.path.join(app.instance_path, 'users.db')  # Adjust path if needed
+    return send_from_directory(directory=os.path.dirname(db_path), 
+                               path=os.path.basename(db_path), 
+                               as_attachment=True)
 
 
 if __name__ == "__main__":
