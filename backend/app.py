@@ -100,7 +100,7 @@ def contact():
 
         # Creates the email message
         msg = Message(
-            subject=f"New Contact Form Message from {name}",
+            f"New Contact Form Message from {name}",
             sender=email,  # email of the person who filled the form
             recipients=['mattikn01@gmail.com'],  # my personal email
             body=f"Name: {name}\nEmail: {email}\nMessage:\n{message_body}"
