@@ -4,10 +4,23 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token
 from flask_cors import CORS 
 from flask import send_from_directory
+from flask_mail import Mail, Message
 import os
 
 app = Flask(__name__)
 CORS(app)
+
+# Sets up email configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  
+app.config['MAIL_PORT'] = 587  #gmail port 
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'mattikn01@gmail.com'  # Replace with your email
+app.config['MAIL_PASSWORD'] = 'wqixkdcfhomvvsrj' #generated an app password after authenticating 2FA on my gmail account
+
+# initializes Flask-Mail
+mail = Mail(app)
+
+
 
 # Database setup
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -78,23 +91,28 @@ def login():
 # Route to handle form submission for contact form
 @app.route('/contact', methods=['POST'])
 def contact():
-    data = request.get_json()  # Get data from the request
+    try:
+        # Gets form data
+        data = request.get_json()
+        name = data['name']
+        email = data['email']
+        message_body = data['message']
 
-    # Extract fields from the form
-    name = data.get('name')
-    email = data.get('email')
-    message_content = data.get('message')
+        # Creates the email message
+        msg = Message(
+            subject=f"New Contact Form Message from {name}",
+            sender=email,  # email of the person who filled the form
+            recipients=['mattikn01@gmail.com'],  # my personal email
+            body=f"Name: {name}\nEmail: {email}\nMessage:\n{message_body}"
+        )
 
-    # Validate required fields
-    if not name or not email or not message_content:
-        return jsonify({"message": "All fields are required!"}), 400
+        # Send the email
+        mail.send(msg)
 
-    # Save the message to the database
-    new_message = Message(name=name, email=email, message=message_content)
-    db.session.add(new_message)
-    db.session.commit()
-
-    return jsonify({"message": "Your message has been sent successfully!"}), 201
+        return jsonify({'message': 'Your message has been sent successfully!'}), 201
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': 'An error occurred while sending your message.'}), 500
 
 
 # Route to save checked prayers, not lost upon reload, assigned to user token --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
