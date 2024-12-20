@@ -16,6 +16,7 @@ app.config['MAIL_PORT'] = 587  #gmail port
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'mattikn01@gmail.com'  # Replace with your email
 app.config['MAIL_PASSWORD'] = 'wqixkdcfhomvvsrj' #generated an app password after authenticating 2FA on my gmail account
+app.config['MAIL_DEFAULT_SENDER'] = 'mattikn01@gmail.com'
 
 # initializes Flask-Mail
 mail = Mail(app)
@@ -101,7 +102,6 @@ def contact():
         # Creates the email message
         msg = Message(
             f"New Contact Form Message from {name}",
-            sender=email,  # email of the person who filled the form
             recipients=['mattikn01@gmail.com'],  # my personal email
             body=f"Name: {name}\nEmail: {email}\nMessage:\n{message_body}"
         )
