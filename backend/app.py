@@ -12,16 +12,14 @@ CORS(app)
 
 # Sets up email configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'  
-app.config['MAIL_PORT'] = 587  #gmail port 
+app.config['MAIL_PORT'] = 587  # Gmail port 
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'mattikn01@gmail.com'  # Replace with your email
-app.config['MAIL_PASSWORD'] = 'wqixkdcfhomvvsrj' #generated an app password after authenticating 2FA on my gmail account
+app.config['MAIL_USERNAME'] = 'mattikn01@gmail.com'  # my email
+app.config['MAIL_PASSWORD'] = 'wqixkdcfhomvvsrj'  # Generated app password after authenticating 2FA on Gmail
 app.config['MAIL_DEFAULT_SENDER'] = 'mattikn01@gmail.com'
 
-# initializes Flask-Mail
+# Initializes Flask-Mail
 mail = Mail(app)
-
-
 
 # Database setup
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -37,10 +35,9 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    
-    
+
 # Model to store contact form submissions
-class Message(db.Model):
+class MessageModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False)
@@ -50,13 +47,12 @@ class Message(db.Model):
         self.name = name
         self.email = email
         self.message = message
-        
 
-# Prayer Tracker Model  --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
+# Prayer Tracker Model (Enhancement not implemented on frontend)
 class PrayerLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    date = db.Column(db.String(10), nullable=False)  # Format: YYYY-MM-DD
+    date = db.Column(db.String(10), nullable=False)  
     prayers_completed = db.Column(db.String(100), nullable=False)  # Stores checked prayers as a comma-separated string
 
 # Initialize the database
@@ -67,12 +63,10 @@ with app.app_context():
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    # this checks to see if the username already exists
     existing_user = User.query.filter_by(username=data['username']).first()
     if existing_user:
         return jsonify({"message": "Username already exists."}), 400  # Returns 400 for bad request
 
-    # if username doesn't exist, creates a new user
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
     new_user = User(username=data['username'], password=hashed_password)
     db.session.add(new_user)
@@ -88,25 +82,21 @@ def login():
         return jsonify({"message": "Login successful!", "token": access_token}), 200
     return jsonify({"message": "Invalid credentials!"}), 401
 
-
 # Route to handle form submission for contact form
 @app.route('/contact', methods=['POST'])
 def contact():
     try:
-        # Gets form data
         data = request.get_json()
         name = data['name']
         email = data['email']
         message_body = data['message']
 
-        # Creates the email message
         msg = Message(
-            f"New Contact Form Message from {name}",
+            subject=f"New Contact Form Message from {name}",
             recipients=['mattikn01@gmail.com'],  # my personal email
             body=f"Name: {name}\nEmail: {email}\nMessage:\n{message_body}"
         )
 
-        # Send the email
         mail.send(msg)
 
         return jsonify({'message': 'Your message has been sent successfully!'}), 201
@@ -114,8 +104,7 @@ def contact():
         print(f"Error: {e}")
         return jsonify({'error': 'An error occurred while sending your message.'}), 500
 
-
-# Route to save checked prayers, not lost upon reload, assigned to user token --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
+# Route to save checked prayers (Enhancement not implemented on frontend)
 @app.route('/prayer-tracker', methods=['POST'])
 def save_prayer_log():
     data = request.get_json()
@@ -123,7 +112,6 @@ def save_prayer_log():
     date = data.get('date')  # Date selected by user
     prayers = data.get('prayers_completed')  # List of checked prayers
 
-    # Find existing log or create a new one --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
     log = PrayerLog.query.filter_by(user_id=user_id, date=date).first()
     if log:
         log.prayers_completed = ','.join(prayers)
@@ -134,29 +122,24 @@ def save_prayer_log():
     db.session.commit()
     return jsonify({"message": "Prayer log saved successfully!"}), 200
 
-
-# Route to fetch saved prayers for a particular date --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
+# Route to fetch saved prayers for a particular date (Enhancement not implemented on frontend)
 @app.route('/prayer-tracker', methods=['GET'])
 def get_prayer_log():
     user_id = request.args.get('user_id')  # Extracted from token on frontend
     date = request.args.get('date')  # Selected date
 
-    # Fetch prayer log for the specific user and date --> ATTENTION: CODE IS NOT BEING CALLED BY FRONTEND, PART OF AN ENHANCEMENT WHICH DIDN'T GO FORTH
     log = PrayerLog.query.filter_by(user_id=user_id, date=date).first()
     prayers = log.prayers_completed.split(',') if log else []
     
     return jsonify({"prayers_completed": prayers}), 200
 
-
-# Route to download database file to see contact form messages 
-
+# Route to download database file
 @app.route('/download-db', methods=['GET'])
 def download_db():
     db_path = os.path.join(app.instance_path, 'users.db')  
     return send_from_directory(directory=os.path.dirname(db_path), 
                                path=os.path.basename(db_path), 
                                as_attachment=True)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
